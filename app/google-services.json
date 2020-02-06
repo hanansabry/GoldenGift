@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "49412121959",
+    "firebase_url": "https://golden-gift.firebaseio.com",
+    "project_id": "golden-gift",
+    "storage_bucket": "golden-gift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49412121959:android:7ae729a74e2735283c7bc2",
+        "android_client_info": {
+          "package_name": "com.android.goldengift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49412121959-fdkh9evc61klk0nlo14a7n9qg4im9m3c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.goldengift",
+            "certificate_hash": "51247baa05eff6421afb67f99b356fa2ad164748"
+          }
+        },
+        {
+          "client_id": "49412121959-tamd9143n4sqj6h9a8k4sb3kn7081rh8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD2S6vQdjMyjXqmaIsFM1RjAWIgXepHsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49412121959-tamd9143n4sqj6h9a8k4sb3kn7081rh8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
