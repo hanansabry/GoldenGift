@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".intro.IntroActivity">
+
+    <ImageView
+        android:id="@+id/app_logo_img_view"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_logo_img_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".intro.IntroActivity">
+
+        <Button
+            android:id="@+id/shopping"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_rounded_color_primary"
+            android:drawableStart="@drawable/gift_icon"
+            android:onClick="goToGalleryScreen"
+            android:padding="16dp"
+            android:text="Login as Customer"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_rounded_color_accent"
+            android:onClick="onStoreLoginClicked"
+            android:text="Store Manager? Login Now"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_rounded_color_accent"
+            android:onClick="onStoreRegisterClicked"
+            android:text="Register As Store Manager"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
