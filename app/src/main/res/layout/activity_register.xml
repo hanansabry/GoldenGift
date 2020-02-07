@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/back_button"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/didact_gothic"
+            android:fontFamily="@font/glegoo"
             android:gravity="center"
             android:text="New Store"
             android:textColor="@color/colorPrimary"

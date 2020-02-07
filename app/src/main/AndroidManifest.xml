@@ -10,7 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".store.StoreHome"></activity>
+        <activity android:name=".customer.GalleryActivity"></activity>
+        <activity android:name=".store.products.ProductsActivity" />
+        <activity android:name=".store.categories.CategoriesActivity" />
+        <activity android:name=".store.orders.OrdersActivity" />
+        <activity android:name=".store.StoreHome" />
         <activity android:name=".register.RegisterActivity" />
         <activity android:name=".login.LoginActivity" />
         <activity android:name=".intro.IntroActivity" />
