@@ -19,7 +19,7 @@ public class CategoriesPresenter {
     }
 
     public void retrieveAllCategories(CategoriesRepository.CategoriesRetrievingCallback callback) {
-        categoriesRepository.retrieveAllCategories(callback);
+        categoriesRepository.retrieveCategoriesByCurrentStoreId(callback);
     }
 
     public void bindCategories(ArrayList<Category> categories) {

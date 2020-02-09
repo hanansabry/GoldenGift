@@ -20,6 +20,8 @@ public interface CategoriesRepository {
         void onInsertNewCategoryFailed(String errmsg);
     }
 
+    void retrieveCategoriesByCurrentStoreId(CategoriesRetrievingCallback callback);
+
     void retrieveAllCategories(CategoriesRetrievingCallback callback);
 
     void insertNewCategory(Category category, CategoriesInsertionCallback callback);
