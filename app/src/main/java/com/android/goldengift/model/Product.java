@@ -6,8 +6,11 @@ public class Product {
 
     private String id;
     private String name;
-    private String unitPrice;
+    private String desc;
+    private double unitPrice;
     private String unit;
+    private String categoryId;
+    private String storeId;
     private ArrayList<String> imagesUrls;
 
     public String getId() {
@@ -26,11 +29,19 @@ public class Product {
         this.name = name;
     }
 
-    public String getUnitPrice() {
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(String unitPrice) {
+    public void setUnitPrice(double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -40,6 +51,22 @@ public class Product {
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
     }
 
     public ArrayList<String> getImagesUrls() {

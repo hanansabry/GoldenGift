@@ -98,6 +98,16 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
                             }
                         }
                     });
+                } else {
+                    //add category to store node
+                    String storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    HashMap<String, Object> categoryValue = new HashMap<>();
+                    categoryValue.put(category.getName(), true);
+                    mDatabase.getReference(STORES)
+                            .child(storeId)
+                            .child(CATEGORIES)
+                            .updateChildren(categoryValue);
+                    callback.onInsertNewCategorySuccessfully();
                 }
             }
 

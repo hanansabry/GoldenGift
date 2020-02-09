@@ -1,9 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".store.products.ProductsActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Add product" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/didact_gothic"
+                android:padding="4dp"
+                android:text="Select Category:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/category_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:visibility="invisible" />
+
+                <ProgressBar
+                    android:id="@+id/category_spinner_progressbar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+            </FrameLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/product_name_text_input_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/product_name_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:drawablePadding="8dp"
+                    android:hint="Product Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/desc_text_input_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/desc_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:drawablePadding="8dp"
+                    android:hint="Description"
+                    android:inputType="textLongMessage"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/didact_gothic"
+                    android:padding="4dp"
+                    android:text="Unit Price:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/unit_price_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:visibility="invisible" />
+
+                    <ProgressBar
+                        android:id="@+id/unit_price_progressbar"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/unit_price_input_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/unit_price_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:drawablePadding="8dp"
+                    android:hint="Selling Price"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/add_images_button"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/btn_rounded_color_accent"
+                android:text="Add Product Images"
+                android:textColor="@android:color/white" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/images_uploaded_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Images are uploaded"
+                    android:textColor="@android:color/darker_gray"
+                    android:visibility="invisible" />
+
+                <ProgressBar
+                    android:id="@+id/images_uploading_progressbar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+            <!--<ImageView-->
+            <!--android:id="@+id/selected_img"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
