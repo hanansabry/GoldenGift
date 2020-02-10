@@ -9,6 +9,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import androidx.annotation.NonNull;
 
@@ -33,7 +35,7 @@ public class OrdersRepositoryImpl implements OrdersRepository {
                     Order order = orderSnapshot.getValue(Order.class);
                     orders.add(order);
                 }
-                callback.onRetrieveOrdersSuccessfully(orders);
+                callback.onRetrieveOrdersSuccessfully(sortByDate(orders));
             }
 
             @Override
@@ -41,6 +43,16 @@ public class OrdersRepositoryImpl implements OrdersRepository {
                 callback.onRetrievedOrdersFailed(databaseError.getMessage());
             }
         });
+    }
+
+    private ArrayList<Order> sortByDate(ArrayList<Order> orders) {
+        Collections.sort(orders, new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return o2.getDate().compareTo(o1.getDate());
+            }
+        });
+        return orders;
     }
 
     @Override

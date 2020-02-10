@@ -63,7 +63,10 @@ public class OrdersActivity extends AppCompatActivity implements OrdersRepositor
     }
 
     @Override
-    public void onOrderClicked() {
-        startActivity(new Intent(this, OrderInvoiceActivity.class));
+    public void onOrderClicked(int position) {
+        Order order = presenter.getOrderByPosition(position);
+        Intent intent = new Intent(this, OrderInvoiceActivity.class);
+        intent.putExtra(Order.class.getName(), order);
+        startActivity(intent);
     }
 }

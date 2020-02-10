@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class OrdersPresenter {
 
     interface OrderCallback {
-        void onOrderClicked();
+        void onOrderClicked(int position);
     }
 
     private ArrayList<Order> orders = new ArrayList<>();
@@ -25,6 +25,10 @@ public class OrdersPresenter {
     public void onBindOrderAtPosition(OrdersAdapter.OrderViewHolder holder, int position) {
         Order order = orders.get(position);
         holder.setOrderData(order);
+    }
+
+    public Order getOrderByPosition(int position) {
+        return orders.get(position);
     }
 
     public void bindOrders(ArrayList<Order> orders) {

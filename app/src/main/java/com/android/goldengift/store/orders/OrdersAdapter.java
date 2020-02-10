@@ -63,7 +63,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
             moreImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    orderCallback.onOrderClicked();
+                    orderCallback.onOrderClicked(getAdapterPosition());
                 }
             });
         }

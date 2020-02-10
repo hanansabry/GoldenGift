@@ -1,8 +1,11 @@
 package com.android.goldengift.model;
 
-import android.widget.ArrayAdapter;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Order {
+import java.util.HashMap;
+
+public class Order implements Parcelable {
 
     private String id;
     private Long orderNumber;
@@ -10,8 +13,38 @@ public class Order {
     private String date;
     private String address;
     private String status;
-    private ArrayAdapter<OrderItem> orderItems;
+    private HashMap<String, OrderItem> orderItems;
     private double totalCost;
+
+    public Order() {
+    }
+
+    protected Order(Parcel in) {
+        id = in.readString();
+        if (in.readByte() == 0) {
+            orderNumber = null;
+        } else {
+            orderNumber = in.readLong();
+        }
+        phoneNumber = in.readString();
+        date = in.readString();
+        address = in.readString();
+        status = in.readString();
+        orderItems = (HashMap<String, OrderItem>) in.readSerializable();
+        totalCost = in.readDouble();
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -53,11 +86,19 @@ public class Order {
         this.status = status;
     }
 
-    public ArrayAdapter<OrderItem> getOrderItems() {
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public HashMap<String, OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    public void setOrderItems(ArrayAdapter<OrderItem> orderItems) {
+    public void setOrderItems(HashMap<String, OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
 
@@ -67,5 +108,27 @@ public class Order {
 
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        if (orderNumber == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeLong(orderNumber);
+        }
+        dest.writeString(phoneNumber);
+        dest.writeString(date);
+        dest.writeString(address);
+        dest.writeString(status);
+        dest.writeSerializable(orderItems);
+        dest.writeDouble(totalCost);
     }
 }
