@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class CategoriesPresenter {
 
+    public interface CategoryClickListener {
+        void onCategoryClicked(int position);
+    }
+
     private final CategoriesRepository categoriesRepository;
     private ArrayList<Category> categories = new ArrayList<>();
 
@@ -28,6 +32,10 @@ public class CategoriesPresenter {
 
     public int getCategoriesSize() {
         return categories.size();
+    }
+
+    public Category getCategoryAtPosition(int position) {
+        return categories.get(position);
     }
 
     public void onBindCategoryAtPosition(CategoriesAdapter.CategoryViewHolder holder, int position) {

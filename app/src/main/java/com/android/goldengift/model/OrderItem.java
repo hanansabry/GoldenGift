@@ -4,9 +4,18 @@ import java.io.Serializable;
 
 public class OrderItem implements Serializable {
 
+    private String productId;
     private String itemName;
     private int quantity;
     private double cost;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getItemName() {
         return itemName;

@@ -42,7 +42,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
     }
 
     private void initializeCategoriesRecylerView() {
-        mCategoriesAdapter = new CategoriesAdapter(presenter, false);
+        mCategoriesAdapter = new CategoriesAdapter(presenter, false, null);
 
         EmptyRecyclerView mCategoriesRecyclerView = findViewById(R.id.categories_recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

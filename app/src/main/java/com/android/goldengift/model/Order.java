@@ -7,9 +7,14 @@ import java.util.HashMap;
 
 public class Order implements Parcelable {
 
+    public enum OrderStatus {
+        New, Pending, Delivered
+    }
+
     private String id;
     private Long orderNumber;
     private String phoneNumber;
+    private String customerName;
     private String date;
     private String address;
     private String status;
@@ -27,6 +32,7 @@ public class Order implements Parcelable {
             orderNumber = in.readLong();
         }
         phoneNumber = in.readString();
+        customerName = in.readString();
         date = in.readString();
         address = in.readString();
         status = in.readString();
@@ -94,6 +100,14 @@ public class Order implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public HashMap<String, OrderItem> getOrderItems() {
         return orderItems;
     }
@@ -125,6 +139,7 @@ public class Order implements Parcelable {
             dest.writeLong(orderNumber);
         }
         dest.writeString(phoneNumber);
+        dest.writeString(customerName);
         dest.writeString(date);
         dest.writeString(address);
         dest.writeString(status);

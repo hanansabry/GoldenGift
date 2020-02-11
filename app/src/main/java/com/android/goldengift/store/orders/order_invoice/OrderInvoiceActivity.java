@@ -2,10 +2,13 @@ package com.android.goldengift.store.orders.order_invoice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.goldengift.EmptyRecyclerView;
+import com.android.goldengift.Injection;
 import com.android.goldengift.R;
 import com.android.goldengift.model.Order;
 
@@ -31,7 +34,7 @@ public class OrderInvoiceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Order order = intent.getParcelableExtra(Order.class.getName());
 
-        presenter = new OrderInvoicePresenter();
+        presenter = new OrderInvoicePresenter(Injection.provideOrdersRepoisotry());
         initializeViews(order);
         initializeOrderItemsRecyclerView(order);
     }
@@ -69,9 +72,19 @@ public class OrderInvoiceActivity extends AppCompatActivity {
         adapter.bindOrderItems(presenter.getOrderItemsAsArrayLit(order.getOrderItems()));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.store_order_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+        } else if (item.getItemId() == R.id.accept_action) {
+            presenter.updateOrderStatusToPending(orderNumber.getText().toString());
+            Toast.makeText(this, "Order is accepted", Toast.LENGTH_LONG).show();
+            finish();
         }
         return true;
     }

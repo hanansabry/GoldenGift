@@ -17,10 +17,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     private final CategoriesPresenter presenter;
     private boolean gallery;
+    private final CategoriesPresenter.CategoryClickListener categoryClickListener;
 
-    public CategoriesAdapter(CategoriesPresenter presenter, boolean gallery) {
+    public CategoriesAdapter(CategoriesPresenter presenter, boolean gallery, CategoriesPresenter.CategoryClickListener categoryClickListener) {
         this.presenter = presenter;
         this.gallery = gallery;
+        this.categoryClickListener = categoryClickListener;
     }
 
     public void bindCategories(ArrayList<Category> categories) {
@@ -60,6 +62,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             categoryNameTextView = itemView.findViewById(R.id.category_name);
+            if (gallery) {
+                View cardView = itemView.findViewById(R.id.category_layout);
+                cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (categoryClickListener != null) {
+                            categoryClickListener.onCategoryClicked(getAdapterPosition());
+                        }
+                    }
+                });
+            }
         }
 
         public void setCategoryName(Category category) {

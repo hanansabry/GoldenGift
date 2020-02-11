@@ -1,5 +1,6 @@
 package com.android.goldengift.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import com.android.goldengift.EmptyRecyclerView;
 import com.android.goldengift.Injection;
 import com.android.goldengift.R;
 import com.android.goldengift.backend.categories.CategoriesRepository;
+import com.android.goldengift.customer.category_products.CategoryProductsActivity;
 import com.android.goldengift.model.Category;
 import com.android.goldengift.store.categories.CategoriesAdapter;
 import com.android.goldengift.store.categories.CategoriesPresenter;
@@ -18,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-public class GalleryActivity extends AppCompatActivity implements CategoriesRepository.CategoriesRetrievingCallback {
+public class CustomerCategoriesActivity extends AppCompatActivity implements CategoriesRepository.CategoriesRetrievingCallback, CategoriesPresenter.CategoryClickListener {
 
     private CategoriesPresenter presenter;
     private CategoriesAdapter mCategoriesAdapter;
@@ -26,7 +28,7 @@ public class GalleryActivity extends AppCompatActivity implements CategoriesRepo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
+        setContentView(R.layout.activity_customer_categories);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,7 +40,7 @@ public class GalleryActivity extends AppCompatActivity implements CategoriesRepo
     }
 
     private void initializeCategoriesRecylerView() {
-        mCategoriesAdapter = new CategoriesAdapter(presenter, true);
+        mCategoriesAdapter = new CategoriesAdapter(presenter, true, this);
 
         EmptyRecyclerView mCategoriesRecyclerView = findViewById(R.id.categories_recyclerView);
         mCategoriesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -62,5 +64,13 @@ public class GalleryActivity extends AppCompatActivity implements CategoriesRepo
     @Override
     public void onCategoriesRetrievedFailed(String errmsg) {
         Toast.makeText(this, errmsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCategoryClicked(int position) {
+        Category category = presenter.getCategoryAtPosition(position);
+        Intent intent = new Intent(this, CategoryProductsActivity.class);
+        intent.putExtra(Category.class.getName(), category);
+        startActivity(intent);
     }
 }

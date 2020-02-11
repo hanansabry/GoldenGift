@@ -1,6 +1,8 @@
 package com.android.goldengift.backend.orders;
 
 import com.android.goldengift.model.Order;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 
@@ -27,7 +30,7 @@ public class OrdersRepositoryImpl implements OrdersRepository {
 
     @Override
     public void retrieveOrdersForCurrentStore(final RetrievingOrdersCallback callback) {
-        mDatabase.child(storeId).addValueEventListener(new ValueEventListener() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Order> orders = new ArrayList<>();
@@ -61,7 +64,23 @@ public class OrdersRepositoryImpl implements OrdersRepository {
     }
 
     @Override
-    public void requestNewOrder(Order order, OrdersRequestCallback callback) {
+    public void requestNewOrder(Order order, final OrdersRequestCallback callback) {
+        mDatabase.child(order.getOrderNumber().toString()).setValue(order).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    callback.onRequestNewOrderSuccessfully();
+                } else {
+                    callback.onRequestNewOrderFailed(task.getException().getMessage());
+                }
+            }
+        });
+    }
 
+    @Override
+    public void updateOrderStatus(String orderNumber) {
+        HashMap<String, Object> orderStatusValue = new HashMap<>();
+        orderStatusValue.put("status", Order.OrderStatus.Pending);
+        mDatabase.child(orderNumber).updateChildren(orderStatusValue);
     }
 }

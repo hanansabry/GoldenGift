@@ -16,8 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".store.orders.order_invoice.OrderInvoiceActivity"></activity>
-        <activity android:name=".customer.GalleryActivity" />
+        <activity android:name=".customer.payment.PaymentActivity"></activity>
+        <activity android:name=".customer.checkout.CheckoutActivity" />
+        <activity android:name=".customer.category_products.CategoryProductsActivity" />
+        <activity android:name=".store.orders.order_invoice.OrderInvoiceActivity" />
+        <activity android:name=".customer.CustomerCategoriesActivity" />
         <activity android:name=".store.products.ProductsActivity" />
         <activity android:name=".store.categories.CategoriesActivity" />
         <activity android:name=".store.orders.OrdersActivity" />

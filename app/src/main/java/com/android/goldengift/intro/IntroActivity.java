@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.android.goldengift.R;
-import com.android.goldengift.customer.GalleryActivity;
+import com.android.goldengift.customer.CustomerCategoriesActivity;
 import com.android.goldengift.login.LoginActivity;
 import com.android.goldengift.register.RegisterActivity;
 import com.android.goldengift.store.StoreHome;
@@ -36,6 +36,6 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     public void goToGalleryScreen(View view) {
-        startActivity(new Intent(this, GalleryActivity.class));
+        startActivity(new Intent(this, CustomerCategoriesActivity.class));
     }
 }

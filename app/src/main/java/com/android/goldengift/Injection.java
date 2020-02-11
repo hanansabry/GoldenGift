@@ -1,9 +1,13 @@
 package com.android.goldengift;
 
+import android.content.SharedPreferences;
+
 import com.android.goldengift.backend.authentication.AuthenticationRepository;
 import com.android.goldengift.backend.authentication.AuthenticationRepositoryImpl;
 import com.android.goldengift.backend.categories.CategoriesRepository;
 import com.android.goldengift.backend.categories.CategoriesRepositoryImpl;
+import com.android.goldengift.backend.invoice.InvoiceRepository;
+import com.android.goldengift.backend.invoice.InvoiceRepositoryImpl;
 import com.android.goldengift.backend.orders.OrdersRepository;
 import com.android.goldengift.backend.orders.OrdersRepositoryImpl;
 import com.android.goldengift.backend.products.ProductsRepository;
@@ -28,7 +32,7 @@ public class Injection {
         return new AddProductUseCaseHandler(provideCategoriesRepository(), provideProductsRepository(), provideUnitPriceRepository());
     }
 
-    private static ProductsRepository provideProductsRepository() {
+    public static ProductsRepository provideProductsRepository() {
         return new ProductsRepositoryImpl(provideImagesStorage());
     }
 
@@ -42,5 +46,9 @@ public class Injection {
 
     public static OrdersRepository provideOrdersRepoisotry() {
         return new OrdersRepositoryImpl();
+    }
+
+    public static InvoiceRepository provideInvoiceRepository(SharedPreferences sharedPreferences) {
+        return new InvoiceRepositoryImpl(sharedPreferences);
     }
 }

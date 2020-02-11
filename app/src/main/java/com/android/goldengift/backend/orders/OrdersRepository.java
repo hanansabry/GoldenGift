@@ -25,4 +25,6 @@ public interface OrdersRepository {
     void retrieveOrderByNumber(String orderNumber, RetrievingOrdersCallback callback);
 
     void requestNewOrder(Order order, OrdersRequestCallback callback);
+
+    void updateOrderStatus(String orderNumber);
 }

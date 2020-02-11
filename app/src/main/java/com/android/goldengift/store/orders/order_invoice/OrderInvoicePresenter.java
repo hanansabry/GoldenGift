@@ -1,5 +1,6 @@
 package com.android.goldengift.store.orders.order_invoice;
 
+import com.android.goldengift.backend.orders.OrdersRepository;
 import com.android.goldengift.model.OrderItem;
 
 import java.util.ArrayList;
@@ -8,7 +9,14 @@ import java.util.HashMap;
 public class OrderInvoicePresenter {
 
     private ArrayList<OrderItem> orderItems = new ArrayList<>();
+    private OrdersRepository ordersRepository;
 
+    public OrderInvoicePresenter(OrdersRepository ordersRepository) {
+        this.ordersRepository = ordersRepository;
+    }
+
+    public OrderInvoicePresenter() {
+    }
 
     public int getOrderItemsSize() {
         return orderItems.size();
@@ -35,5 +43,9 @@ public class OrderInvoicePresenter {
             }
             return orderItems;
         }
+    }
+
+    public void updateOrderStatusToPending(String orderNumber) {
+        ordersRepository.updateOrderStatus(orderNumber);
     }
 }
