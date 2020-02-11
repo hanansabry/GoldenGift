@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".store.orders.OrdersActivity"
+    android:background="@drawable/background_gift_seamless"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -18,6 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="@color/colorWhite"
             app:title="Your Orders" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -6,8 +6,12 @@ import com.android.goldengift.model.Order;
 import com.android.goldengift.model.OrderItem;
 import com.android.goldengift.model.Product;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.TimeZone;
 
 public class CheckoutPresenter {
 
@@ -65,5 +69,12 @@ public class CheckoutPresenter {
 
     public void requestNewOrder(Order order, OrdersRepository.OrdersRequestCallback callback) {
         ordersRepository.requestNewOrder(order, callback);
+    }
+
+    public String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date today = Calendar.getInstance().getTime();
+        return dateFormat.format(today);
     }
 }

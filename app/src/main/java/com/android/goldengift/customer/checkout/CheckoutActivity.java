@@ -21,7 +21,6 @@ import com.android.goldengift.model.OrderItem;
 import com.android.goldengift.store.orders.order_invoice.OrderInvoicePresenter;
 import com.android.goldengift.store.orders.order_invoice.OrderItemsAdapter;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -100,7 +99,7 @@ public class CheckoutActivity extends AppCompatActivity implements OrdersReposit
         order.setPhoneNumber(phone);
         order.setAddress(add);
         order.setCustomerName(name);
-        order.setDate(new Date().toString());
+        order.setDate(presenter.getCurrentDate());
         order.setOrderNumber(orderNumber);
         order.setStatus(Order.OrderStatus.New.name());
         order.setTotalCost(presenter.getOrderTotalCost());

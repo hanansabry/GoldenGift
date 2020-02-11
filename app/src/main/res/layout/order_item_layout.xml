@@ -17,27 +17,40 @@
         app:cardElevation="6dp"
         app:cardUseCompatPadding="true">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/order_date_layout"
-                android:layout_width="wrap_content"
+            <GridLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:background="@android:color/white"
-                android:orientation="vertical"
-                android:layout_margin="16dp">
+                android:columnCount="2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/didact_gothic"
+                    android:padding="8dp"
+                    android:text="Order Number:"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/order_number_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/didact_gothic"
-                    android:text="Order Number: 25154512145545454"
+                    android:padding="8dp"
+                    android:text="8762387463482346987"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/didact_gothic"
+                    android:padding="8dp"
+                    android:text="Date &amp; Time:"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
 
@@ -46,36 +59,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/didact_gothic"
-                    android:text="10/2/2020 12:25 PM" />
-            </LinearLayout>
+                    android:padding="8dp"
+                    android:text="25/5/2012"
+                    android:textSize="18sp" />
+                <!--</LinearLayout>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/didact_gothic"
+                    android:padding="8dp"
+                    android:text="Order Status"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/order_status_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/didact_gothic"
+                    android:padding="8dp"
+                    android:text="NEW"
+                    android:textSize="18sp" />
 
 
-            <TextView
-                android:id="@+id/order_status_textview"
+            </GridLayout>
+
+            <Button
+                android:id="@+id/more_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/order_date_layout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/glegoo"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="Active"
+                android:background="@color/colorAccent"
+                android:text="Order Details"
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <ImageButton
-                android:id="@+id/more_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:background="@null"
-                android:src="@drawable/ic_more"
-                android:layout_margin="16dp"/>
-
-        </RelativeLayout>
+                android:src="@drawable/ic_more" />
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

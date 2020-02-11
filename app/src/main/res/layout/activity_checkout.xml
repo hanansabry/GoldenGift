@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/background_gift_seamless"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".customer.checkout.CheckoutActivity">
@@ -20,53 +20,16 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:titleTextColor="@color/colorWhite"
-            app:title="Order Summary" />
+            app:title="Order Summary"
+            app:titleTextColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_weight="8"
         android:orientation="vertical">
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/order_number_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="12dp"-->
-        <!--android:weightSum="2">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_weight="1"-->
-        <!--android:fontFamily="@font/didact_gothic"-->
-        <!--android:gravity="center"-->
-        <!--android:text="Order Number"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:textSize="20sp" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/order_number"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_weight="1"-->
-        <!--android:fontFamily="@font/didact_gothic"-->
-        <!--android:gravity="center"-->
-        <!--android:text="44654564321543"-->
-        <!--android:textSize="20sp" />-->
-
-        <!--</LinearLayout>-->
-
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height=".5dp"-->
-        <!--android:background="@android:color/darker_gray" />-->
 
         <LinearLayout
             android:id="@+id/phone_layout"
@@ -225,47 +188,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <RelativeLayout
-            android:id="@+id/total_cost_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="8dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:fontFamily="@font/didact_gothic"
-                android:text="TOTAL"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/total_cost_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/didact_gothic"
-                android:text="00.0"
-                android:textColor="@color/colorAccent"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
     </LinearLayout>
 
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight=".8">-->
+    <!---->
+    <!--</LinearLayout>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
+    <RelativeLayout
+        android:id="@+id/total_cost_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingStart="8dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/didact_gothic"
+            android:text="TOTAL"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/total_cost_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/didact_gothic"
+            android:text="00.0"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/done"
-        android:layout_width="@dimen/btn_width"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:background="@drawable/btn_rounded_color_accent"
+        android:background="@color/colorAccent"
         android:fontFamily="@font/didact_gothic"
         android:gravity="center"
         android:onClick="onDoneClicked"

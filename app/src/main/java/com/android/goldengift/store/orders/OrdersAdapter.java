@@ -3,7 +3,7 @@ package com.android.goldengift.store.orders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.goldengift.R;
@@ -50,7 +50,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
     class OrderViewHolder extends RecyclerView.ViewHolder{
 
         private TextView orderNumberTextView, dateTextView, statusTextView;
-        private ImageButton moreImageButton;
+        private Button moreImageButton;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +69,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrderViewH
         }
 
         public void setOrderData(Order order) {
-            orderNumberTextView.setText(String.format("Order Number: %d", order.getOrderNumber()));
+            orderNumberTextView.setText(String.valueOf(order.getOrderNumber()));
             dateTextView.setText(order.getDate());
             statusTextView.setText(order.getStatus());
         }
