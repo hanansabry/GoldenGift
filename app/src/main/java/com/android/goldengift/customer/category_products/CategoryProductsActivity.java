@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.android.goldengift.EmptyRecyclerView;
 import com.android.goldengift.Injection;
 import com.android.goldengift.R;
 import com.android.goldengift.backend.products.ProductsRepository;
@@ -21,10 +23,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class CategoryProductsActivity extends AppCompatActivity implements ProductsRepository.ProductsRetrievingCallback {
 
+    private ProgressBar progressBar;
     private CategoryProductsPresenter presenter;
     private ProductsAdapter productsAdapter;
 
@@ -44,10 +46,12 @@ public class CategoryProductsActivity extends AppCompatActivity implements Produ
 
         presenter.retrieveCategoryProducts(category.getName(), this);
         initializeProductsRecyclerView();
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     private void initializeProductsRecyclerView() {
-        RecyclerView productsRecyclerView = findViewById(R.id.products_recyclerview);
+        EmptyRecyclerView productsRecyclerView = findViewById(R.id.products_recyclerview);
+        productsRecyclerView.setEmptyView(findViewById(R.id.empty_view));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         productsRecyclerView.setLayoutManager(layoutManager);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(productsRecyclerView.getContext(),
@@ -78,10 +82,16 @@ public class CategoryProductsActivity extends AppCompatActivity implements Produ
     @Override
     public void onRetrievingProductsSuccessfully(ArrayList<Product> products) {
         productsAdapter.bindProducts(products);
+        hideProgressBar();
     }
 
     @Override
     public void onRetrievingProductsFailed(String errmsg) {
         Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show();
+        hideProgressBar();
+    }
+
+    private void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

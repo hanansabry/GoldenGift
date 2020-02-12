@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".customer.payment.OnDeliveryActivity"></activity>
+        <activity android:name=".customer.search.SearchOrdersActivity"></activity>
+        <activity android:name=".customer.payment.OnDeliveryActivity" />
         <activity android:name=".customer.payment.OnlinePaymentActivity" />
         <activity android:name=".customer.payment.PaymentActivity" />
         <activity android:name=".customer.checkout.CheckoutActivity" />

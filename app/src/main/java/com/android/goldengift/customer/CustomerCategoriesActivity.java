@@ -2,7 +2,10 @@ package com.android.goldengift.customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.goldengift.EmptyRecyclerView;
@@ -10,6 +13,7 @@ import com.android.goldengift.Injection;
 import com.android.goldengift.R;
 import com.android.goldengift.backend.categories.CategoriesRepository;
 import com.android.goldengift.customer.category_products.CategoryProductsActivity;
+import com.android.goldengift.customer.search.SearchOrdersActivity;
 import com.android.goldengift.model.Category;
 import com.android.goldengift.store.categories.CategoriesAdapter;
 import com.android.goldengift.store.categories.CategoriesPresenter;
@@ -24,6 +28,7 @@ public class CustomerCategoriesActivity extends AppCompatActivity implements Cat
 
     private CategoriesPresenter presenter;
     private CategoriesAdapter mCategoriesAdapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class CustomerCategoriesActivity extends AppCompatActivity implements Cat
         presenter = new CategoriesPresenter(Injection.provideCategoriesRepository());
         initializeCategoriesRecylerView();
         presenter.retrieveAllCategories(this);
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     private void initializeCategoriesRecylerView() {
@@ -49,9 +55,17 @@ public class CustomerCategoriesActivity extends AppCompatActivity implements Cat
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.customer_search, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+        } else if (item.getItemId() == R.id.search) {
+            startActivity(new Intent(this, SearchOrdersActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -59,11 +73,13 @@ public class CustomerCategoriesActivity extends AppCompatActivity implements Cat
     @Override
     public void onCategoriesRetrievedSuccessfully(ArrayList<Category> categories) {
         mCategoriesAdapter.bindCategories(categories);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onCategoriesRetrievedFailed(String errmsg) {
         Toast.makeText(this, errmsg, Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

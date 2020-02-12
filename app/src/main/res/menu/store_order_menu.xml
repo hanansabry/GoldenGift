@@ -4,8 +4,12 @@
 
     <item
         android:id="@+id/accept_action"
-        android:icon="@drawable/ic_accept"
         android:title="Accept"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/delivered_action"
+        android:title="Delivered"
         app:showAsAction="always" />
 
 </menu>

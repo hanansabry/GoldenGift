@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class OrdersPresenter {
 
-    interface OrderCallback {
+    public interface OrderCallback {
         void onOrderClicked(int position);
     }
 
@@ -37,5 +37,9 @@ public class OrdersPresenter {
 
     public void retrieveStoreOrders(OrdersRepository.RetrievingOrdersCallback callback) {
         ordersRepository.retrieveOrdersForCurrentStore(callback);
+    }
+
+    public void searchOrdersByPhoneNumber(String phoneNumber, OrdersRepository.RetrievingOrdersCallback callback) {
+        ordersRepository.retrieveOrderByPhoneNumber(phoneNumber, callback);
     }
 }

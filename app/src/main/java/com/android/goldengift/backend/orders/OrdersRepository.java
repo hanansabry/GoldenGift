@@ -22,7 +22,7 @@ public interface OrdersRepository {
 
     void retrieveOrdersForCurrentStore(RetrievingOrdersCallback callback);
 
-    void retrieveOrderByNumber(String orderNumber, RetrievingOrdersCallback callback);
+    void retrieveOrderByPhoneNumber(String phoneNumber, RetrievingOrdersCallback callback);
 
     void requestNewOrder(Order order, OrdersRequestCallback callback);
 

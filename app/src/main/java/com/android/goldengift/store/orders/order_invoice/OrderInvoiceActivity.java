@@ -19,8 +19,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class OrderInvoiceActivity extends AppCompatActivity {
 
-    private TextView orderNumber, date, phoneNumber, address, status, totalCost;
+    private TextView orderNumber, date, phoneNumber, address, status, totalCost, deliveryTime, paymentMethod;
     private OrderInvoicePresenter presenter;
+    private boolean isStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class OrderInvoiceActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Order order = intent.getParcelableExtra(Order.class.getName());
+        isStore = intent.getBooleanExtra("IsStore", true);
 
         presenter = new OrderInvoicePresenter(Injection.provideOrdersRepoisotry());
         initializeViews(order);
@@ -51,6 +53,12 @@ public class OrderInvoiceActivity extends AppCompatActivity {
 
         address = findViewById(R.id.address);
         address.setText(order.getAddress());
+
+        deliveryTime = findViewById(R.id.delivery_time);
+        deliveryTime.setText(order.getDeliveryTime());
+
+        paymentMethod = findViewById(R.id.payment_method);
+        paymentMethod.setText(order.getPaymentMethod());
 
         status = findViewById(R.id.status);
         status.setText(order.getStatus());
@@ -75,6 +83,16 @@ public class OrderInvoiceActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.store_order_menu, menu);
+        MenuItem storeAcceptItem = menu.findItem(R.id.accept_action);
+        MenuItem customerDeliveredItem = menu.findItem(R.id.delivered_action);
+
+        if (isStore) {
+            storeAcceptItem.setVisible(true);
+            customerDeliveredItem.setVisible(false);
+        } else {
+            storeAcceptItem.setVisible(false);
+            customerDeliveredItem.setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,9 +100,12 @@ public class OrderInvoiceActivity extends AppCompatActivity {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         } else if (item.getItemId() == R.id.accept_action) {
-            presenter.updateOrderStatusToPending(orderNumber.getText().toString());
+            presenter.updateOrderStatus(orderNumber.getText().toString(), Order.OrderStatus.Pending);
             Toast.makeText(this, "Order is accepted", Toast.LENGTH_LONG).show();
             finish();
+        } else if (item.getItemId() == R.id.delivered_action) {
+            presenter.updateOrderStatus(orderNumber.getText().toString(), Order.OrderStatus.Delivered);
+            Toast.makeText(this, "Order is marked as delivered", Toast.LENGTH_LONG).show();
         }
         return true;
     }

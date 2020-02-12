@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.goldengift.EmptyRecyclerView;
@@ -26,6 +27,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
 
     private CategoriesPresenter presenter;
     private CategoriesAdapter mCategoriesAdapter;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
         presenter = new CategoriesPresenter(Injection.provideCategoriesRepository());
         initializeCategoriesRecylerView();
         presenter.retrieveAllCategories(this);
+        progressBar = findViewById(R.id.progress_bar);
     }
 
     private void initializeCategoriesRecylerView() {
@@ -93,11 +96,13 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
     @Override
     public void onCategoriesRetrievedSuccessfully(ArrayList<Category> categories) {
         mCategoriesAdapter.bindCategories(categories);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onCategoriesRetrievedFailed(String errmsg) {
         Toast.makeText(this, errmsg, Toast.LENGTH_SHORT).show();
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override

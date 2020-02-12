@@ -59,8 +59,25 @@ public class OrdersRepositoryImpl implements OrdersRepository {
     }
 
     @Override
-    public void retrieveOrderByNumber(String orderNumber, RetrievingOrdersCallback callback) {
+    public void retrieveOrderByPhoneNumber(String phoneNumber, final RetrievingOrdersCallback callback) {
+        mDatabase.orderByChild("phoneNumber")
+                .equalTo(phoneNumber)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        ArrayList<Order> orders = new ArrayList<>();
+                        for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+                            Order order = orderSnapshot.getValue(Order.class);
+                            orders.add(order);
+                        }
+                        callback.onRetrieveOrdersSuccessfully(sortByDate(orders));
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        callback.onRetrievedOrdersFailed(databaseError.getMessage());
+                    }
+                });
     }
 
     @Override

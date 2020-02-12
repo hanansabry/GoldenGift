@@ -46,7 +46,7 @@ public class OrderInvoicePresenter {
         }
     }
 
-    public void updateOrderStatusToPending(String orderNumber) {
-        ordersRepository.updateOrderStatus(orderNumber, Order.OrderStatus.Pending);
+    public void updateOrderStatus(String orderNumber, Order.OrderStatus orderStatus) {
+        ordersRepository.updateOrderStatus(orderNumber, orderStatus);
     }
 }
