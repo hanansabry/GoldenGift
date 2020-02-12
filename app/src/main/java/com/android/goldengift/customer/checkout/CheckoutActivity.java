@@ -9,12 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.goldengift.EmptyRecyclerView;
 import com.android.goldengift.Injection;
 import com.android.goldengift.R;
-import com.android.goldengift.backend.orders.OrdersRepository;
 import com.android.goldengift.customer.payment.PaymentActivity;
 import com.android.goldengift.model.Order;
 import com.android.goldengift.model.OrderItem;
@@ -28,7 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-public class CheckoutActivity extends AppCompatActivity implements OrdersRepository.OrdersRequestCallback {
+public class CheckoutActivity extends AppCompatActivity {
 
     private EditText phoneNumber, customerName, address;
     private TextView orderNumberET, totalCost;
@@ -47,7 +45,7 @@ public class CheckoutActivity extends AppCompatActivity implements OrdersReposit
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
-        presenter = new CheckoutPresenter(this, Injection.provideInvoiceRepository(sharedPreferences), Injection.provideOrdersRepoisotry());
+        presenter = new CheckoutPresenter(this, Injection.provideInvoiceRepository(sharedPreferences));
 
         orderNumber = presenter.generateOrderNumber();
         orderItemHashMap = presenter.getOrderItemsAsHashMap();
@@ -111,7 +109,7 @@ public class CheckoutActivity extends AppCompatActivity implements OrdersReposit
     public void onDoneClicked(View view) {
         Order order = getOrderRequestInfo();
         if (presenter.validateOrderInfo(order)) {
-            presenter.requestNewOrder(order, this);
+            goToPaymentActivity(order);
         }
     }
 
@@ -127,15 +125,10 @@ public class CheckoutActivity extends AppCompatActivity implements OrdersReposit
         phoneNumber.setError("Phone is required");
     }
 
-    @Override
-    public void onRequestNewOrderSuccessfully() {
+    public void goToPaymentActivity(Order order) {
         Intent intent = new Intent(this, PaymentActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(Order.class.getName(), order);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    @Override
-    public void onRequestNewOrderFailed(String errmsg) {
-        Toast.makeText(this, errmsg, Toast.LENGTH_LONG).show();
     }
 }

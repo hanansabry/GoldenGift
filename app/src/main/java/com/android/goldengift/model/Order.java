@@ -11,11 +11,17 @@ public class Order implements Parcelable {
         New, Pending, Delivered
     }
 
+    public enum PaymentMethod {
+        Online, OnDelivery
+    }
+
     private String id;
     private Long orderNumber;
     private String phoneNumber;
     private String customerName;
     private String date;
+    private String deliveryTime;
+    private String paymentMethod;
     private String address;
     private String status;
     private HashMap<String, OrderItem> orderItems;
@@ -34,6 +40,8 @@ public class Order implements Parcelable {
         phoneNumber = in.readString();
         customerName = in.readString();
         date = in.readString();
+        deliveryTime = in.readString();
+        paymentMethod = in.readString();
         address = in.readString();
         status = in.readString();
         orderItems = (HashMap<String, OrderItem>) in.readSerializable();
@@ -76,12 +84,28 @@ public class Order implements Parcelable {
         this.date = date;
     }
 
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getStatus() {
@@ -141,6 +165,8 @@ public class Order implements Parcelable {
         dest.writeString(phoneNumber);
         dest.writeString(customerName);
         dest.writeString(date);
+        dest.writeString(deliveryTime);
+        dest.writeString(paymentMethod);
         dest.writeString(address);
         dest.writeString(status);
         dest.writeSerializable(orderItems);

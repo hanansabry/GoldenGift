@@ -1,6 +1,7 @@
 package com.android.goldengift.store.orders.order_invoice;
 
 import com.android.goldengift.backend.orders.OrdersRepository;
+import com.android.goldengift.model.Order;
 import com.android.goldengift.model.OrderItem;
 
 import java.util.ArrayList;
@@ -46,6 +47,6 @@ public class OrderInvoicePresenter {
     }
 
     public void updateOrderStatusToPending(String orderNumber) {
-        ordersRepository.updateOrderStatus(orderNumber);
+        ordersRepository.updateOrderStatus(orderNumber, Order.OrderStatus.Pending);
     }
 }

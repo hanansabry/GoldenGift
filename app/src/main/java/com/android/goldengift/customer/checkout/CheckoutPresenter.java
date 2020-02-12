@@ -1,7 +1,6 @@
 package com.android.goldengift.customer.checkout;
 
 import com.android.goldengift.backend.invoice.InvoiceRepository;
-import com.android.goldengift.backend.orders.OrdersRepository;
 import com.android.goldengift.model.Order;
 import com.android.goldengift.model.OrderItem;
 import com.android.goldengift.model.Product;
@@ -16,13 +15,11 @@ import java.util.TimeZone;
 public class CheckoutPresenter {
 
     private final InvoiceRepository invoiceRepository;
-    private final OrdersRepository ordersRepository;
     private final CheckoutActivity view;
 
-    public CheckoutPresenter(CheckoutActivity view, InvoiceRepository invoiceRepository, OrdersRepository ordersRepository) {
+    public CheckoutPresenter(CheckoutActivity view, InvoiceRepository invoiceRepository) {
         this.view = view;
         this.invoiceRepository = invoiceRepository;
-        this.ordersRepository = ordersRepository;
     }
 
     public double getOrderTotalCost() {
@@ -65,10 +62,6 @@ public class CheckoutPresenter {
             view.showAddressIsRequiredMsg();
         }
         return validate;
-    }
-
-    public void requestNewOrder(Order order, OrdersRepository.OrdersRequestCallback callback) {
-        ordersRepository.requestNewOrder(order, callback);
     }
 
     public String getCurrentDate() {

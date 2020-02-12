@@ -78,9 +78,23 @@ public class OrdersRepositoryImpl implements OrdersRepository {
     }
 
     @Override
-    public void updateOrderStatus(String orderNumber) {
+    public void updateOrderStatus(String orderNumber, Order.OrderStatus status) {
         HashMap<String, Object> orderStatusValue = new HashMap<>();
-        orderStatusValue.put("status", Order.OrderStatus.Pending);
+        orderStatusValue.put("status", status);
         mDatabase.child(orderNumber).updateChildren(orderStatusValue);
+    }
+
+    @Override
+    public void updateOrderDeliveryTime(String orderNumber, String deliveryTime) {
+        HashMap<String, Object> deliveryTimeValue = new HashMap<>();
+        deliveryTimeValue.put("deliveryTime", deliveryTime);
+        mDatabase.child(orderNumber).updateChildren(deliveryTimeValue);
+    }
+
+    @Override
+    public void updateOrderPaymentMethod(String orderNumber, String paymentMethod) {
+        HashMap<String, Object> paymentMethodValue = new HashMap<>();
+        paymentMethodValue.put("paymentMethod", paymentMethodValue);
+        mDatabase.child(orderNumber).updateChildren(paymentMethodValue);
     }
 }

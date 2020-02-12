@@ -26,5 +26,9 @@ public interface OrdersRepository {
 
     void requestNewOrder(Order order, OrdersRequestCallback callback);
 
-    void updateOrderStatus(String orderNumber);
+    void updateOrderStatus(String orderNumber, Order.OrderStatus status);
+
+    void updateOrderDeliveryTime(String orderNumber, String deliveryTime);
+
+    void updateOrderPaymentMethod(String orderNumber, String paymentMethod);
 }
