@@ -28,12 +28,11 @@ public class ProductsRepositoryImpl implements ProductsRepository {
 
     private final ImagesStorage mImagesStorage;
     private final FirebaseDatabase mDatabase;
-    private String storeId;
+//    private String storeId;
 
     public ProductsRepositoryImpl(ImagesStorage mImagesStorage) {
         this.mImagesStorage = mImagesStorage;
         mDatabase = FirebaseDatabase.getInstance();
-        storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @Override
@@ -93,6 +92,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
         final DatabaseReference productsRef = mDatabase.getReference(PRODUCTS);
         final String productId = productsRef.push().getKey();
 
+        String storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         product.setStoreId(storeId);
         //upload model images to firebase storage
         final ArrayList<String> firebaseStorageImages = new ArrayList<>();
@@ -108,7 +108,7 @@ public class ProductsRepositoryImpl implements ProductsRepository {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     callback.onAddingNewProductsSuccessfully();
-                                    addModelToAdvertiserAndCategory(productId, product.getCategoryId());
+                                    addProductToStoreAndCategory(productId, product.getCategoryId());
                                 } else {
                                     callback.onAddingNewProductFailed(task.getException().getMessage());
                                 }
@@ -125,7 +125,8 @@ public class ProductsRepositoryImpl implements ProductsRepository {
         }
     }
 
-    private void addModelToAdvertiserAndCategory(String productId, String categoryId) {
+    private void addProductToStoreAndCategory(String productId, String categoryId) {
+        String storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference storesDbRef = mDatabase.getReference(STORES);
         DatabaseReference categoriesDbRef = mDatabase.getReference(CATEGORIES);
         HashMap<String, Object> productIdValue = new HashMap<>();

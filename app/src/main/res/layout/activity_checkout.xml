@@ -61,6 +61,7 @@
                 android:fontFamily="@font/didact_gothic"
                 android:gravity="center"
                 android:hint="Your Phone"
+                android:inputType="phone"
                 android:textSize="20sp" />
 
         </LinearLayout>

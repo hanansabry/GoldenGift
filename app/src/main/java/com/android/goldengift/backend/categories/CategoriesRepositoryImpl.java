@@ -27,10 +27,10 @@ public class CategoriesRepositoryImpl implements CategoriesRepository{
 
     @Override
     public void retrieveCategoriesByCurrentStoreId(final CategoriesRetrievingCallback callback) {
-        String currentStoreId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mDatabase.getReference(STORES)
-                .child(currentStoreId)
-                .child(CATEGORIES)
+//        String currentStoreId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mDatabase.getReference(CATEGORIES)
+//                .child(currentStoreId)
+//                .child(CATEGORIES)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

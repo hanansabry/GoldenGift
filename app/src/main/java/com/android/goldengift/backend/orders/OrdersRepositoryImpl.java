@@ -3,7 +3,6 @@ package com.android.goldengift.backend.orders;
 import com.android.goldengift.model.Order;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,11 +20,11 @@ public class OrdersRepositoryImpl implements OrdersRepository {
 
     private static final String ORDERS = "orders";
     private final DatabaseReference mDatabase;
-    private String storeId;
+//    private String storeId;
 
     public OrdersRepositoryImpl() {
         mDatabase = FirebaseDatabase.getInstance().getReference(ORDERS);
-        storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        storeId = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @Override

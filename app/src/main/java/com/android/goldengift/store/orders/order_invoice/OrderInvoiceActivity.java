@@ -106,6 +106,7 @@ public class OrderInvoiceActivity extends AppCompatActivity {
         } else if (item.getItemId() == R.id.delivered_action) {
             presenter.updateOrderStatus(orderNumber.getText().toString(), Order.OrderStatus.Delivered);
             Toast.makeText(this, "Order is marked as delivered", Toast.LENGTH_LONG).show();
+            finish();
         }
         return true;
     }
